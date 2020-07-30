@@ -1,0 +1,40 @@
+Int led1=13;
+int led2=12;
+int temp=A0;
+const int threshold=30;
+
+void setup()
+ {
+  
+      // put your setup code here, to run once:
+pinMode(led1,OUTPUT);
+pinMode(led2,OUTPUT);
+Serial.begin(9600);
+}
+
+void loop()
+ {
+        
+// put your main code here, to run repeatedly:
+int read=analogRead(temp);
+Serial.println(read);
+float volt=(read*3.3)/1024;
+Serial.println(volt);
+float temp1=(volt-0.5)*10;
+Serial.print("The plant is not diseased");
+Serial.print(temp1);
+Serial.print("*C");
+if(temp1>=threshold)
+{
+  digitalWrite(led1,HIGH);
+  delay(3000);
+}
+if(temp1<=threshold)
+{
+  digitalWrite(led2,HIGH);
+  delay(3000);
+}
+
+Serial.println();
+delay(1000);
+}
